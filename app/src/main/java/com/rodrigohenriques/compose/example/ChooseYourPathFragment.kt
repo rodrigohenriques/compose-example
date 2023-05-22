@@ -10,13 +10,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.rodrigohenriques.compose.example.ui.theme.CustomTheme
 
 class ChooseYourPathFragment : Fragment() {
+  private val navController by lazy { findNavController() }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -25,29 +29,25 @@ class ChooseYourPathFragment : Fragment() {
     return ComposeView(requireContext()).apply {
       setContent {
         CustomTheme {
-          Screen()
+          Screen(
+            goToLegacyViews = {
+              navController.navigate(ChooseYourPathFragmentDirections.actionOpenLegacyViews())
+            }
+          )
         }
       }
     }
   }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-  }
-
-  override fun onDestroyView() {
-    super.onDestroyView()
-  }
 }
 
 @Composable
-private fun Screen() {
-  Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
-    Button(onClick = { /*TODO*/ }) {
-      Text(text = "Legacy UI Toolkit")
+private fun Screen(goToLegacyViews: () -> Unit = {}, goToCompose: () -> Unit = {}) {
+  Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+    Button(onClick = goToLegacyViews) {
+      Text(text = stringResource(id = R.string.legacy_views_label))
     }
 
-    Button(onClick = { /*TODO*/ }) {
+    Button(onClick = goToCompose) {
       Text(text = "Compose UI Toolkit")
     }
   }
