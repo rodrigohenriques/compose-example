@@ -29,9 +29,12 @@ class ChooseYourPathFragment : Fragment() {
     return ComposeView(requireContext()).apply {
       setContent {
         CustomTheme {
-          Screen(
+          ContactsScreen(
             goToLegacyViews = {
               navController.navigate(ChooseYourPathFragmentDirections.actionOpenLegacyViews())
+            },
+            goToCompose = {
+              navController.navigate(ChooseYourPathFragmentDirections.actionOpenCompose())
             }
           )
         }
@@ -41,14 +44,14 @@ class ChooseYourPathFragment : Fragment() {
 }
 
 @Composable
-private fun Screen(goToLegacyViews: () -> Unit = {}, goToCompose: () -> Unit = {}) {
+private fun ContactsScreen(goToLegacyViews: () -> Unit = {}, goToCompose: () -> Unit = {}) {
   Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
     Button(onClick = goToLegacyViews) {
       Text(text = stringResource(id = R.string.legacy_views_label))
     }
 
     Button(onClick = goToCompose) {
-      Text(text = "Compose UI Toolkit")
+      Text(text = stringResource(id = R.string.compose_label))
     }
   }
 }
@@ -57,6 +60,6 @@ private fun Screen(goToLegacyViews: () -> Unit = {}, goToCompose: () -> Unit = {
 @Composable
 fun Screen_Preview() {
   CustomTheme {
-    Screen()
+    ContactsScreen()
   }
 }

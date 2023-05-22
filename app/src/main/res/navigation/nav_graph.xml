@@ -13,11 +13,18 @@
         <action
             android:id="@+id/action_open_legacy_views"
             app:destination="@id/LegacyViewsFragment" />
+
+        <action
+            android:id="@+id/action_open_compose"
+            app:destination="@id/ComposeFragment" />
     </fragment>
     <fragment
         android:id="@+id/LegacyViewsFragment"
         android:name="com.rodrigohenriques.compose.example.LegacyViewsFragment"
         android:label="@string/legacy_views_label"
-        tools:layout="@layout/fragment_legacy_views">
-    </fragment>
+        tools:layout="@layout/fragment_legacy_views" />
+    <fragment
+        android:id="@+id/ComposeFragment"
+        android:name="com.rodrigohenriques.compose.example.ComposeFragment"
+        android:label="@string/compose_label" />
 </navigation>
